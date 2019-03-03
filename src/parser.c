@@ -74,15 +74,6 @@ static void walk_package_list(struct cpm_package_list *list)
 			if (line_buffer[i] != NULL)
 				free(line_buffer[i]);
 
-	struct cpm_package_entry *row = list->head;
-	while (1) {
-		printf("Lib: %s, Version: %s\n", row->lib_name, row->lib_version);
-		if (row->next == NULL)
-			break;
-		row = row->next;
-	}
-
-
 }
 
 static struct cpm_package_entry *walk_parse_line(const char *line)
@@ -90,9 +81,9 @@ static struct cpm_package_entry *walk_parse_line(const char *line)
 	int mid_idx = -1;
 	int line_len = strlen(line);
 
-	// Find the : middle point.
+	// Find the @ middle point.
 	for (int i=0; i<line_len; ++i) {
-		if (line[i] == ':') {
+		if (line[i] == '@') {
 			mid_idx = i;
 			break;
 		}
