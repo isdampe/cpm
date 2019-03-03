@@ -10,3 +10,9 @@ cpm: $(obj)
 
 clean:
 	rm $(obj)
+
+install:
+	@cp bin/cpm /usr/local/bin/cpm
+
+uninstall:
+	@rm /usr/local/bin/cpm

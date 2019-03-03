@@ -47,6 +47,10 @@ int cpm_execute_install(struct cpm_session *session)
 		if (error_count > 0) {
 			fprintf(stderr, "Encountered %i errors trying to install libraries\n", error_count);
 			return -1;
+		} else {
+			printf("When compiling, don't forget to include the cpm-libs/ directory\n");
+			printf("For example: gcc -I ./cpm-libs *.c\n");
+			printf("And then you can include libraries like #include \"isdampe/libotp/src/otp.h\"\n");
 		}
 
 
