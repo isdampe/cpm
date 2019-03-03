@@ -3,4 +3,5 @@
 struct cpm_package_list cpm_parse_package_list(const char *package_fp);
 static void walk_package_list(struct cpm_package_list *list);
 static struct cpm_package_entry *walk_parse_line(const char *line);
+void cpm_destroy_parser(struct cpm_package_list *list);
 #endif

@@ -120,3 +120,25 @@ static struct cpm_package_entry *walk_parse_line(const char *line)
 
 	return entry;
 }
+
+void cpm_destroy_parser(struct cpm_package_list *list)
+{
+	if (list->package_src != NULL)
+		free(list->package_src);
+
+	struct cpm_package_entry *row = list->head, *next = NULL;
+	while (1) {
+		if (row->next == NULL)
+			break;
+
+		if (row->lib_name != NULL)
+			free(row->lib_name);
+		if (row->lib_version != NULL)
+			free(row->lib_version);
+
+		next = row->next;
+		free(row);
+		row = next;
+	}
+
+}
