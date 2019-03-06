@@ -99,20 +99,15 @@ static struct cpm_package_entry *walk_parse_line(const char *line)
 	entry->next = NULL;
 
 	int idx = 0;
-	char pc = '\0';
 	for (int i=0; i<mid_idx; ++i) {
-		if (line[i] == '"' || line[i] == '\\') {
-			if (pc == '\\')
-				entry->lib_name[idx++] = line[i];
-		} else {
+		//Don't include special chars.
+		if (line[i] != '"' && line[i] != '\\' && line[i] != '\'')
 			entry->lib_name[idx++] = line[i];
-		}
-		pc = line[i];
 	}
 
 	idx = 0;
 	for (int i=(mid_idx +1); i<line_len; ++i) {
-		if (line[i] == '"' && pc != '\\')
+		if (line[i] == '"')
 			continue;
 		else
 			entry->lib_version[idx++] = line[i];
